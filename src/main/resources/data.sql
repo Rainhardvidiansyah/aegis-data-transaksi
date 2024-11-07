@@ -1,0 +1,33 @@
+----INSERT INTO users (email, password, is_active) VALUES
+----        ('user1@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user2@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user3@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user4@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user5@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user6@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user7@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user8@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user9@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user10@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user11@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user12@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user13@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user14@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false),
+----        ('user15@example.com', '$2a$12$2uNo07kSdXl7rv8yX2CSmu5AzDh2kcGxG1Gcua8RMrPi5AFP.CBA2', false);
+--
+--
+--INSERT INTO user_role (user_id, role_id) VALUES
+--    (1, 1), (1, 2),
+--    (3, 3),
+--    (4, 4),
+--    (5, 3),
+--    (6, 3),
+--    (7, 3),
+--    (8, 3),
+--    (9, 3),
+--    (10, 3),
+--    (11, 1), (11, 4),
+--    (12, 1), (12, 2),
+--    (13, 2), (13, 2),
+--    (14, 1), (14, 2),
+--    (15, 2);
