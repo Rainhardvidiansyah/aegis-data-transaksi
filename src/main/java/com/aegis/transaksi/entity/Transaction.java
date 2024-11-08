@@ -2,14 +2,29 @@ package com.aegis.transaksi.entity;
 
 import com.aegis.transaksi.enums.TransactionStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "transactions") @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Transaction {
+
+    /*
+    class transaction:
+    uuid -> id
+    users -> users
+    transaction_date -> transactionDate
+    Bigdecimal -> totalAmount
+    List<TransactionItem> transactionItem
+
+     */
 
 
     @Id
@@ -30,6 +45,9 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 50)
     private TransactionStatus status;
+
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TransactionItem> transactionItem;
 
 
 
