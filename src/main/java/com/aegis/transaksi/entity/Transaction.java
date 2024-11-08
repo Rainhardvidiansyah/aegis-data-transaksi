@@ -1,5 +1,6 @@
 package com.aegis.transaksi.entity;
 
+import com.aegis.transaksi.auditor.BaseEntity;
 import com.aegis.transaksi.enums.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "transactions") @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class Transaction {
+public class Transaction extends BaseEntity {
 
     /*
     class transaction:
