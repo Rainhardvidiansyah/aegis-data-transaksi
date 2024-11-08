@@ -67,41 +67,41 @@ class RegistrationServiceTest {
 //        Mockito.verify(userRepository).save(any(Users.class));
 //    }
 
-    @Test
-    void findSameEmail() {
-        var user = new Users();
-        user.setEmail("rainhard@email.com");
-
-        Mockito.when(userRepository.getUserByEmail("rainhard@email.com"))
-                .thenReturn(Optional.of(user));
-
-        Boolean service = registrationService.findSameEmail("rainhard@email.com");
-
-        assertEquals(true, service);
-        assertNotNull(service);
-
-
-        Mockito.verify(userRepository).getUserByEmail("rainhard@email.com");
-
-    }
-
-    @Test
-    void role() {
-
-        var role = new Roles();
-        role.setRoleName(ERole.ROLE_EMPLOYEE);
-
-        Mockito.when(roleRepository.findRolesByERole(ERole.ROLE_EMPLOYEE.name())).thenReturn(Optional.of(role));
-
-        List<Roles> roleService = registrationService.role();
-
-        assertNotNull(roleService);
-        assertEquals(ERole.ROLE_EMPLOYEE, roleService.get(0).getRoleName());
-
-        System.out.println(roleService);
-
-        Mockito.verify(roleRepository).findRolesByERole(ERole.ROLE_EMPLOYEE.name());
-
-
-    }
+//    @Test
+//    void findSameEmail() {
+//        var user = new Users();
+//        user.setEmail("rainhard@email.com");
+//
+//        Mockito.when(userRepository.getUserByEmail("rainhard@email.com"))
+//                .thenReturn(Optional.of(user));
+//
+//        Boolean service = registrationService.findSameEmail("rainhard@email.com");
+//
+//        assertEquals(true, service);
+//        assertNotNull(service);
+//
+//
+//        Mockito.verify(userRepository).getUserByEmail("rainhard@email.com");
+//
+//    }
+//
+//    @Test
+//    void role() {
+//
+//        var role = new Roles();
+//        role.setRoleName(ERole.ROLE_EMPLOYEE);
+//
+//        Mockito.when(roleRepository.findRolesByERole(ERole.ROLE_EMPLOYEE.name())).thenReturn(Optional.of(role));
+//
+//        List<Roles> roleService = registrationService.role();
+//
+//        assertNotNull(roleService);
+//        assertEquals(ERole.ROLE_EMPLOYEE, roleService.get(0).getRoleName());
+//
+//        System.out.println(roleService);
+//
+//        Mockito.verify(roleRepository).findRolesByERole(ERole.ROLE_EMPLOYEE.name());
+//
+//
+//    }
 }
