@@ -33,7 +33,7 @@ public class CsvController {
 
 
     @GetMapping("/transaction/{id}/csv") //transaction/agj94gjt944/csv
-    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CASHIER')")
     public ResponseEntity<byte[]> createReport(@PathVariable UUID id) {
         try {
 
@@ -45,7 +45,6 @@ public class CsvController {
             try (FileInputStream fis = new FileInputStream(csvFile)) {
                 csvContent = fis.readAllBytes();
             }
-
             csvFile.delete();
 
             return ResponseEntity.ok()
@@ -57,6 +56,10 @@ public class CsvController {
             return ResponseEntity.status(500).build();
         }
     }
+
+
+    //TINGGAL IMPLEMENTASI CETAK DARI TANGGAL BERAPA KE TANGGAL BERAPA
+    //TIMES UP!!
 
 
 
