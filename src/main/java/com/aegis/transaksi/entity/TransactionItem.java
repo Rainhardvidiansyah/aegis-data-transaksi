@@ -1,13 +1,29 @@
 package com.aegis.transaksi.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
 @Table(name = "transaction_item")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class TransactionItem {
+
+    /*
+    class: transactionitem
+
+    UUID transactionItemId
+    Transaction transaction
+    Products product
+     Integer quantity
+     BigDecimal price
+     BigDecimal totalPrice
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,7 +43,6 @@ public class TransactionItem {
 
     @Column(name = "price", precision = 15, scale = 2, nullable = false)
     private BigDecimal price;
-
 
     @Column(name = "total_price", precision = 15, scale = 2, nullable = false)
     private BigDecimal totalPrice;
