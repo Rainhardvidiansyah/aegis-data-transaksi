@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE users u SET u.is_active = true WHERE u.email = :email", nativeQuery = true)
+    @Query(value = "UPDATE users SET is_active = true WHERE email = :email", nativeQuery = true)
     int activateUserByEmail(@Param("email") String email);
 
     @Query(nativeQuery = true, value = "SELECT u.* FROM users u " +
