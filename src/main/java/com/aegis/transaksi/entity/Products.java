@@ -29,8 +29,6 @@ public class Products {
     @Column(name = "stocks")
     private int stocks;
 
-    @OneToMany(mappedBy = "product")
-    private List<TransactionItem> transactionItems;
 
 
 
