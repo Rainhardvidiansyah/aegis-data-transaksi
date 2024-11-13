@@ -29,28 +29,7 @@ public class TransactionController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CASHIER')")
     public ResponseEntity<Transaction> saveTransaction(@RequestBody TransactionRequest request) {
 
-        try {
-            Transaction transaction = new Transaction();
-
-            transaction.setUser(request.getUsers());
-            transaction.setTransactionDate(request.getTransactionDate());
-
-            List<TransactionItem> transactionItems = request.getTransactionItems().stream().map(itemRequest -> {
-                TransactionItem item = new TransactionItem();
-                item.setProduct(itemRequest.getProduct());
-                item.setQuantity(itemRequest.getQuantity());
-                item.setPrice(itemRequest.getPrice());
-                return item;
-            }).collect(Collectors.toList());
-
-            Transaction savedTransaction = transactionService.saveTransaction(transaction, transactionItems);
-            return new ResponseEntity<>(savedTransaction, HttpStatus.CREATED);
-
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return null;
 
     }
 
@@ -58,9 +37,10 @@ public class TransactionController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<?> getTransactionById(@PathVariable UUID id){
 
-        var transaction =  this.transactionService.getTransactionById(id);
+        //var transaction =  this.transactionService.getTransactionById(id);
 
-        return new ResponseEntity<>(transaction, HttpStatus.OK);
+        //return new ResponseEntity<>(transaction, HttpStatus.OK);
+        return null;
     }
 
 
