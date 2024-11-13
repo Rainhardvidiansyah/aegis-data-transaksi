@@ -35,26 +35,27 @@ public class CsvController {
     @GetMapping("/transaction/{id}/csv") //transaction/agj94gjt944/csv
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CASHIER')")
     public ResponseEntity<byte[]> createReport(@PathVariable UUID id) {
-        try {
+//        try {
 
-            Optional<Transaction> transaction = transactionService.getTransactionById(id);
-
-            File csvFile = csvReportService.generateTransactionCsvFile(transaction.get());
-
-            byte[] csvContent;
-            try (FileInputStream fis = new FileInputStream(csvFile)) {
-                csvContent = fis.readAllBytes();
-            }
-            csvFile.delete();
-
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=transaction_report.csv")
-                    .contentType(MediaType.parseMediaType("text/csv"))
-                    .body(csvContent);
-
-        } catch (IOException e) {
-            return ResponseEntity.status(500).build();
-        }
+//            Optional<Transaction> transaction = transactionService.getTransactionById(id);
+//
+//            File csvFile = csvReportService.generateTransactionCsvFile(transaction.get());
+//
+//            byte[] csvContent;
+//            try (FileInputStream fis = new FileInputStream(csvFile)) {
+//                csvContent = fis.readAllBytes();
+//            }
+//            csvFile.delete();
+//
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=transaction_report.csv")
+//                    .contentType(MediaType.parseMediaType("text/csv"))
+//                    .body(csvContent);
+//
+//        } catch (IOException e) {
+//            return ResponseEntity.status(500).build();
+//        }
+            return null;
     }
 
 
