@@ -54,16 +54,10 @@ public class Transaction extends BaseEntity {
     }
 
 
-    public void addTransactionItem(List<TransactionItem> transactionItem){
-//        this.transactionItem.add(transactionItem);
-        this.transactionItem = transactionItem;
-        transactionItem.forEach(a -> a.setTransaction(this));
+    public void removeTransactionItem(TransactionItem transactionItem){
+        this.transactionItem.remove(transactionItem);
+        transactionItem.setTransaction(null);
     }
-
-//    public void removeTransactionItem(TransactionItem transactionItem){
-//        this.transactionItem.remove(transactionItem);
-//        transactionItem.setTransaction(null);
-//    }
 
     // Not-null property references a transient value - transient instance must be saved before current operation
 
