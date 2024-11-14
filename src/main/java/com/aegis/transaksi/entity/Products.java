@@ -2,10 +2,7 @@ package com.aegis.transaksi.entity;
 
 import com.aegis.transaksi.auditor.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -13,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "products")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 public class Products extends BaseEntity {
 
     @Id
