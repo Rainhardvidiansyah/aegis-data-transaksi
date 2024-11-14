@@ -48,6 +48,11 @@ public class Transaction extends BaseEntity {
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<TransactionItem> transactionItem;
 
+    public void addTransactionItem(List<TransactionItem> items){
+        this.transactionItem = items;
+        items.forEach(a -> a.setTransaction(this));
+    }
+
 
     public void addTransactionItem(List<TransactionItem> transactionItem){
 //        this.transactionItem.add(transactionItem);
