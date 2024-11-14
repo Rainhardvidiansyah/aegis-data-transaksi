@@ -2,17 +2,14 @@ package com.aegis.transaksi.entity;
 
 import com.aegis.transaksi.auditor.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
 @Table(name = "transaction_item")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 public class TransactionItem extends BaseEntity {
 
     /*
@@ -31,8 +28,8 @@ public class TransactionItem extends BaseEntity {
     @Column(name = "transaction_item_id")
     private UUID transactionItemId;
 
-    @ManyToOne
-    @JoinColumn(name = "transaction_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 
     @ManyToOne
@@ -40,7 +37,7 @@ public class TransactionItem extends BaseEntity {
     private Products product;
 
     @Column(nullable = false)
-    private Integer quantity; //Jumlah product
+    private Integer quantity;
 
     @Column(name = "price", precision = 15, scale = 2, nullable = false)
     private BigDecimal price;
