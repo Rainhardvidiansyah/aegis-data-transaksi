@@ -48,7 +48,6 @@ public class TransactionController {
 
         var response = TransactionResponseDto.response(transaction);
 
-
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }
