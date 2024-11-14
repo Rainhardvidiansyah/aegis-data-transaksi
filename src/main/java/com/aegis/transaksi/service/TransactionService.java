@@ -5,9 +5,10 @@ import com.aegis.transaksi.entity.Products;
 import com.aegis.transaksi.entity.Transaction;
 import com.aegis.transaksi.entity.TransactionItem;
 import com.aegis.transaksi.enums.TransactionStatus;
+import com.aegis.transaksi.exceptions.ProductNotFoundException;
 import com.aegis.transaksi.repository.ProductRepository;
 import com.aegis.transaksi.repository.TransactionItemRepository;
-import com.aegis.transaksi.repository.transactionRepository;
+import com.aegis.transaksi.repository.TransactionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,11 +32,11 @@ public class TransactionService {
         // dalam detail transaksi ada product dan kuantitas product yang dibeli
 
 
-        private final transactionRepository transactionRepository;
+        private final TransactionRepository transactionRepository;
         private final ProductRepository productRepository;
         private final TransactionItemRepository transactionItemRepository;
 
-        public TransactionService(com.aegis.transaksi.repository.transactionRepository transactionRepository, ProductRepository productRepository, TransactionItemRepository transactionItemRepository) {
+        public TransactionService(TransactionRepository transactionRepository, ProductRepository productRepository, TransactionItemRepository transactionItemRepository) {
             this.transactionRepository = transactionRepository;
             this.productRepository = productRepository;
             this.transactionItemRepository = transactionItemRepository;
@@ -50,25 +51,24 @@ public class TransactionService {
 
         Transaction transaction = new Transaction();
 
-
         List<TransactionItem> items = new ArrayList<>();
 
         transaction.setStatus(TransactionStatus.COMPLETED);
 
         transaction.setTransactionDate(LocalDateTime.now());
+
         transaction = this.transactionRepository.save(transaction);
 
 
-        for(TransactionRequestDto requestDto : transactionRequest){
+        for(TransactionRequestDto requestDto: transactionRequest){
 
             var product = this.productRepository.findById(requestDto.getProductId());
             logger.info("product id: {}", requestDto.getProductId());
             Products products = product.get();
 
             if(!product.isPresent()){
-                throw new RuntimeException("Product not found");
+                throw new ProductNotFoundException("Product not found");
             }
-
 
             TransactionItem transactionItem = new TransactionItem();
 
@@ -79,8 +79,6 @@ public class TransactionService {
             transactionItem.setQuantity(requestDto.getQuantity());
 
             BigDecimal quantities = BigDecimal.valueOf(requestDto.getQuantity());
-
-
             BigDecimal totalPrice = products.getPrice().multiply(quantities);
 
 
@@ -107,7 +105,7 @@ public class TransactionService {
             listOfTransactionItem.forEach(System.out::println);
 
             Transaction finalTransaction = transaction;
-            listOfTransactionItem.stream().forEach(transactionItem1 -> transactionItem1.setTransaction(finalTransaction));
+            listOfTransactionItem.forEach(transactionItem1 -> transactionItem1.setTransaction(finalTransaction));
 
 
             logger.info("listOfTransactionItem IS: {}", listOfTransactionItem);
@@ -224,21 +222,7 @@ sebagai kasir saya akan:
      */
 
 
-/*
 
- L IS: [TransactionItem(transactionItemI
-d=9be33ac5-65c3-4f03-b692-22cd2945575d, transaction=Transaction(transactionId=419e9acb-7696-4824-8b61-545671b69e44, user=null, transactionDate=2024-11-13T03:23:36.348183
-100, totalAmount=0.000000, status=COMPLETED, transactionItem=null), product=Products(productId=d58e8b59-2b8e-46f7-b9c2-ab0d0f14e8a9, productName=Product A, price=10000.0
-0, stocks=46), quantity=2, price=10000.00, totalPrice=20000.00), TransactionItem(transactionItemId=60afb376-3d70-4b94-9356-7399e4ac3f1d, transaction=Transaction(transact
-ionId=419e9acb-7696-4824-8b61-545671b69e44, user=null, transactionDate=2024-11-13T03:23:36.348183100, totalAmount=0.000000, status=COMPLETED, transactionItem=null), prod
-uct=Products(productId=d58e8b59-2b8e-46f7-b9c2-ab0d0f14e8a9, productName=Product A, price=10000.00, stocks=46), quantity=2, price=10000.00, totalPrice=20000.00), Transac
-tionItem(transactionItemId=325c3f6f-e8da-4fc0-9044-63897b565b0a, transaction=Transaction(transactionId=419e9acb-7696-4824-8b61-545671b69e44, user=null, transactionDate=2
-024-11-13T03:23:36.348183100, totalAmount=0.000000, status=COMPLETED, transactionItem=null), product=Products(productId=c3b7207c-6aaf-45a3-aca6-c64bcaaf52f3, productName
-=Product C, price=15000.00, stocks=34), quantity=3, price=15000.00, totalPrice=45000.00), TransactionItem(transactionItemId=397d6822-d050-4e8d-b4e2-1bca6fac29d4, transac
-tion=Transaction(transactionId=419e9acb-7696-4824-8b61-545671b69e44, user=null, transactionDate=2024-11-13T03:23:36.348183100, totalAmount=0.000000, status=COMPLETED, tr
-ansactionItem=null), product=Products(productId=c3b7207c-6aaf-45a3-aca6-c64bcaaf52f3, productName=Product C, price=15000.00, stocks=34), quantity=3, price=15000.00, totalPrice=45000.00)]
-
- */
 
 /*
         Alur refund:
