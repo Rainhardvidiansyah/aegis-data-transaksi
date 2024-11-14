@@ -3,10 +3,7 @@ package com.aegis.transaksi.entity;
 import com.aegis.transaksi.auditor.BaseEntity;
 import com.aegis.transaksi.enums.TransactionStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "transactions") @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class Transaction extends BaseEntity {
 
     /*
@@ -34,7 +32,7 @@ public class Transaction extends BaseEntity {
     private UUID transactionId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private Users user;
 
     @Column(name = "transaction_date", nullable = false)
@@ -47,9 +45,22 @@ public class Transaction extends BaseEntity {
     @Column(name = "status", length = 50)
     private TransactionStatus status;
 
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<TransactionItem> transactionItem;
 
+
+    public void addTransactionItem(List<TransactionItem> transactionItem){
+//        this.transactionItem.add(transactionItem);
+        this.transactionItem = transactionItem;
+        transactionItem.forEach(a -> a.setTransaction(this));
+    }
+
+//    public void removeTransactionItem(TransactionItem transactionItem){
+//        this.transactionItem.remove(transactionItem);
+//        transactionItem.setTransaction(null);
+//    }
+
+    // Not-null property references a transient value - transient instance must be saved before current operation
 
 
 }
