@@ -1,6 +1,7 @@
 package com.aegis.transaksi.dto;
 
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -19,9 +20,9 @@ public class TransactionRequestDto {
     @NotNull(message = "Product Id tidak boleh null")
     private UUID productId;
 
-    @Size(min = 1, message = "Kuantitas tidak boleh kurang dari 1")
-    @NotNull(message = "Null tidak boleh digunakan di sini")
-    private int quantity;
+    @NotNull(message = "Quantity cannot be null")
+    @Min(value = 1, message = "Quantity must be greater than or equal to 1")
+    private Integer quantity;
 
     public TransactionRequestDto(UUID productId, int quantity) {
         this.productId = productId;
