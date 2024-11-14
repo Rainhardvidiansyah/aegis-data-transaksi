@@ -1,20 +1,18 @@
 package com.aegis.transaksi.controller;
 
 
-import com.aegis.transaksi.dto.TransactionRequest;
 import com.aegis.transaksi.dto.TransactionRequestDto;
 import com.aegis.transaksi.dto.responses.TransactionResponseDto;
-import com.aegis.transaksi.entity.Transaction;
 
 import com.aegis.transaksi.service.TransactionService;
 import jakarta.validation.Valid;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -30,35 +28,39 @@ public class TransactionController {
     }
 
 
-    @PostMapping("/save")
+    @PostMapping("/")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CASHIER')")
-    public ResponseEntity<?> saveTransaction(@RequestBody @Valid TransactionRequestDto request, BindingResult bindingResult) {
+    public ResponseEntity<?> saveTransaction(@RequestBody @Valid List<TransactionRequestDto> request, BindingResult result) {
 
-        if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+        if (result.hasErrors()) {
+            List<String> errors = result.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
-        var transactionRequest = new TransactionRequestDto(request.getProductId(), request.getQuantity());
-
-        List<TransactionRequestDto> transactionRequestList = new ArrayList<>();
-
-        transactionRequestList.add(transactionRequest);
-
-        var transaction = transactionService.createTransaction(transactionRequestList);
+        var transaction = transactionService.createTransaction(request);
 
         var response = TransactionResponseDto.response(transaction);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
-
     }
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<?> getTransactionById(@PathVariable UUID id){
-
-        //var transaction =  this.transactionService.getTransactionById(id);
-
-        //return new ResponseEntity<>(transaction, HttpStatus.OK);
+        //implement service and create a response class for this!!!
         return null;
     }
 
