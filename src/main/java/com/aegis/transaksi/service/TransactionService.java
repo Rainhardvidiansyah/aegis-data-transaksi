@@ -62,8 +62,10 @@ public class TransactionService {
 
         for(TransactionRequestDto requestDto: transactionRequest){
 
-            var product = this.productRepository.findById(requestDto.getProductId());
-            logger.info("product id: {}", requestDto.getProductId());
+            UUID productId = UUID.fromString(requestDto.getProductId());
+
+            var product = this.productRepository.findById(productId);
+
             Products products = product.get();
 
             if(!product.isPresent()){
