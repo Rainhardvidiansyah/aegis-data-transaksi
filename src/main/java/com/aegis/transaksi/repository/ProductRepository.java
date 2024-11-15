@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Products, UUID> {
+public interface  ProductRepository extends JpaRepository<Products, UUID> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM products p WHERE p.product_name = :product_name")
     Products findProductByProductName(@Param("product_name") String productName);
