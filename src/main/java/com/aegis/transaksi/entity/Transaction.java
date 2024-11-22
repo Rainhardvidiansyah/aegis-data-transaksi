@@ -2,6 +2,7 @@ package com.aegis.transaksi.entity;
 
 import com.aegis.transaksi.auditor.BaseEntity;
 import com.aegis.transaksi.enums.TransactionStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,6 +46,8 @@ public class Transaction extends BaseEntity {
     @Column(name = "status", length = 50)
     private TransactionStatus status;
 
+
+    @JsonBackReference
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<TransactionItem> transactionItem;
 
@@ -54,9 +57,13 @@ public class Transaction extends BaseEntity {
     }
 
 
-    public void removeTransactionItem(TransactionItem transactionItem){
-        this.transactionItem.remove(transactionItem);
-        transactionItem.setTransaction(null);
+    public void removeTransactionItem(){
+        this.transactionItem.clear();
+       // transactionItem.setTransaction(null);
+    }
+
+    public void addAllItem(List<TransactionItem> items){
+        this.transactionItem.addAll(items);
     }
 
     // Not-null property references a transient value - transient instance must be saved before current operation
