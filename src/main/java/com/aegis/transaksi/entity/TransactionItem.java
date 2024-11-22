@@ -1,6 +1,7 @@
 package com.aegis.transaksi.entity;
 
 import com.aegis.transaksi.auditor.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class TransactionItem extends BaseEntity {
     @Column(name = "transaction_item_id")
     private UUID transactionItemId;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;
