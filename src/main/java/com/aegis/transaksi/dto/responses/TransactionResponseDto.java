@@ -20,22 +20,32 @@ public class TransactionResponseDto {
 
     private List<BigDecimal> totalPrice;
 
+    private BigDecimal totalAmount;
+
+    //TODO: use Collectors.teeing() instead of using double stream like below. Double stream will make your app inefficient
 
 
     public static TransactionResponseDto response(Transaction transaction){
 
-        List<UUID> transactionItemId = transaction.getTransactionItem().stream()
-                .map(TransactionItem::getTransactionItemId).collect(Collectors.toList());
-        List<BigDecimal> totalPrice = transaction.getTransactionItem().stream()
-                .map(TransactionItem::getTotalPrice).collect(Collectors.toList());
+        List<TransactionItem> transactionItems = transaction.getTransactionItem();
+
+
+        Tuple result = transactionItems.stream().collect(
+                        Collectors.teeing(
+                                Collectors.mapping(TransactionItem::getTransactionItemId, Collectors.toList()),
+                                Collectors.mapping(TransactionItem::getTotalPrice, Collectors.toList()),
+                                (transactionItemsId, totalPrice) -> new Tuple(transactionItemsId, totalPrice)
+                        )
+                );
 
         TransactionResponseDto response = new TransactionResponseDto();
         response.setTransaction_id(transaction.getTransactionId());
-        response.setTransactionItemsId(transactionItemId);
-        response.setTotalPrice(totalPrice);
-
-
+        response.setTransactionItemsId(result.transactionItemIds);
+        response.setTotalPrice(result.totalPrices);
+        response.setTotalAmount(transaction.getTotalAmount());
 
         return response;
     }
 }
+
+
