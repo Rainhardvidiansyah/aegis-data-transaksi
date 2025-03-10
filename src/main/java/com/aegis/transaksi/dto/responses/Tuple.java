@@ -12,4 +12,20 @@ public Tuple(List<UUID> transactionItemIds, List<BigDecimal> totalPrices) {
     this.transactionItemIds = transactionItemIds;
     this.totalPrices = totalPrices;
 }
+
+    public List<BigDecimal> getTotalPrices() {
+        return totalPrices;
+    }
+
+    public void setTotalPrices(List<BigDecimal> totalPrices) {
+        this.totalPrices = totalPrices;
+    }
+
+    public List<UUID> getTransactionItemIds() {
+        return transactionItemIds;
+    }
+
+    public void setTransactionItemIds(List<UUID> transactionItemIds) {
+        this.transactionItemIds = transactionItemIds;
+    }
 }

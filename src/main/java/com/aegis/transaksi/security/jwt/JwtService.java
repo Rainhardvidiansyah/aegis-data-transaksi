@@ -25,10 +25,11 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final Logger log = LoggerFactory.getLogger(JwtService.class);
-    @Value("${jwt.secret.key}")
+
+    @Value("${jwt.secret}")
     private String key;
 
-    @Value("${jwt.expiration.date}")
+    @Value("${jwt.expiration}")
     private Long jwtExpiration;
 
 

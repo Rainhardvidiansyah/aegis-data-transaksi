@@ -27,6 +27,35 @@ public class Products extends BaseEntity {
     private int stocks;
 
 
+    public UUID getProductId() {
+        return productId;
+    }
 
+    public void setProductId(UUID productId) {
+        this.productId = productId;
+    }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(int stocks) {
+        this.stocks = stocks;
+    }
 }

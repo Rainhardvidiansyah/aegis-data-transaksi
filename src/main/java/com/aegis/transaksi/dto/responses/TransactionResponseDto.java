@@ -46,6 +46,38 @@ public class TransactionResponseDto {
 
         return response;
     }
+
+    public UUID getTransaction_id() {
+        return transaction_id;
+    }
+
+    public void setTransaction_id(UUID transaction_id) {
+        this.transaction_id = transaction_id;
+    }
+
+    public List<UUID> getTransactionItemsId() {
+        return transactionItemsId;
+    }
+
+    public void setTransactionItemsId(List<UUID> transactionItemsId) {
+        this.transactionItemsId = transactionItemsId;
+    }
+
+    public List<BigDecimal> getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(List<BigDecimal> totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 }
 
 
